@@ -19,6 +19,7 @@ public class TweenTest extends ApplicationAdapter {
     Sprite sprite;
 	Sprite sprite2;
 	Sprite sprite3;
+	Sprite sprite4;
 
 	TweenManager manager;
 
@@ -26,14 +27,16 @@ public class TweenTest extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("center.png");
+
         sprite = new Sprite(img);
-        sprite.setCenter(100, 100);
-
 		sprite2 = new Sprite(img);
-		sprite2.setCenter(100, 100);
-
 		sprite3 = new Sprite(img);
+		sprite4 = new Sprite(img);
+
+        sprite.setCenter(100, 100);
+		sprite2.setCenter(100, 100);
 		sprite3.setCenter(100, 100);
+		sprite4.setCenter(200, 200);
 
 		Tween.registerAccessor(Sprite.class, new SpriteAccessor());
 
@@ -62,6 +65,11 @@ public class TweenTest extends ApplicationAdapter {
 				.repeatYoyo(5, 0.5f)
 				.start(manager);
 
+		Tween.to(sprite4, SpriteAccessor.SCALE_XY, 0.5f)
+				.target(0.5f, 0.5f)
+				.repeatYoyo(2, 0.5f)
+				.start(manager);
+
 	}
 
 	@Override
@@ -70,7 +78,6 @@ public class TweenTest extends ApplicationAdapter {
 
 		manager.update(delta);
 
-
 		Gdx.gl.glClearColor(0.5f, 0.1f, 0.6f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -78,6 +85,7 @@ public class TweenTest extends ApplicationAdapter {
 		sprite.draw(batch);
 		sprite2.draw(batch);
 		sprite3.draw(batch);
+		sprite4.draw(batch);
 		batch.end();
 	}
 }
